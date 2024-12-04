@@ -1,0 +1,21 @@
+import turtle
+f = turtle.Turtle()
+# drawing speed set to 100
+f.speed(100)  
+f.penup()
+# Starting from the center of the screen
+f.goto(0,0)  
+f.pendown()
+f.getscreen().bgcolor("#994444")
+def star(turtle, size):
+    # drawing will stop if size is very small.
+    if size <= 10:  
+        return
+    else:
+        for i in range(8):    
+            turtle.forward(size)
+            star(turtle, size / 3)  # uses recursion to draw smaller stars.
+            turtle.right(216)  # angle of Rotation=216 deg to form a star shape
+star(f, 100)
+
+turtle.done()
