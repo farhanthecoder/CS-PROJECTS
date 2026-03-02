@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Brand -->
+    <color name="brand_pink">#FF3B80</color>
+    <color name="brand_pink_dark">#D4006A</color>
+    <color name="brand_purple">#7C3AED</color>
+
+    <!-- Backgrounds -->
+    <color name="bg_dark">#0D0D1A</color>
+    <color name="bg_card">#1C1C2E</color>
+    <color name="bg_card_elevated">#2C2C3E</color>
+
+    <!-- Text -->
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#AEAEB2</color>
+    <color name="text_hint">#636366</color>
+
+    <!-- Semantic -->
+    <color name="success">#34C759</color>
+    <color name="error">#FF3B30</color>
+
+    <!-- Surface / stroke -->
+    <color name="stroke">#3A3A4A</color>
+    <color name="overlay_scrim">#80000000</color>
+</resources>
