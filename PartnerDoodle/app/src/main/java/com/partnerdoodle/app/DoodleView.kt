@@ -65,7 +65,7 @@ class DoodleView @JvmOverloads constructor(
 
     // ── Background ───────────────────────────────────────────────────────────
 
-    var backgroundColor: Int = Color.WHITE
+    var canvasColor: Int = Color.WHITE
         set(value) {
             field = value
             canvasBitmap?.eraseColor(value)
@@ -77,7 +77,7 @@ class DoodleView @JvmOverloads constructor(
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         canvasBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888).also { bmp ->
-            bmp.eraseColor(backgroundColor)
+            bmp.eraseColor(canvasColor)
             drawingCanvas = Canvas(bmp)
         }
     }
@@ -143,7 +143,7 @@ class DoodleView @JvmOverloads constructor(
     }
 
     private fun redrawAll() {
-        canvasBitmap?.eraseColor(backgroundColor)
+        canvasBitmap?.eraseColor(canvasColor)
         paths.forEach { (path, paint) -> drawingCanvas?.drawPath(path, paint) }
         invalidate()
     }
@@ -154,7 +154,7 @@ class DoodleView @JvmOverloads constructor(
         paths.clear()
         undoStack.clear()
         currentPath = Path()
-        canvasBitmap?.eraseColor(backgroundColor)
+        canvasBitmap?.eraseColor(canvasColor)
         invalidate()
     }
 
@@ -163,7 +163,7 @@ class DoodleView @JvmOverloads constructor(
     fun getBitmap(): Bitmap {
         val bmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bmp)
-        canvas.drawColor(backgroundColor)
+        canvas.drawColor(canvasColor)
         draw(canvas)
         return bmp
     }

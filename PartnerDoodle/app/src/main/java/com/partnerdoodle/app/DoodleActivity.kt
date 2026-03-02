@@ -131,7 +131,7 @@ class DoodleActivity : AppCompatActivity() {
             MaterialAlertDialogBuilder(this)
                 .setTitle("Background colour")
                 .setItems(names) { _, idx ->
-                    binding.doodleView.backgroundColor = backgroundColors[idx]
+                    binding.doodleView.canvasColor = backgroundColors[idx]
                 }
                 .show()
         }

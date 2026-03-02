@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg_card">#1C1C2E</color>
+    <color name="bg_card_elevated">#2C2C3E</color>
+    <color name="bg_dark">#0D0D1A</color>
+    <color name="brand_pink">#FF3B80</color>
+    <color name="brand_pink_dark">#D4006A</color>
+    <color name="brand_purple">#7C3AED</color>
+    <color name="error">#FF3B30</color>
+    <color name="overlay_scrim">#80000000</color>
+    <color name="stroke">#3A3A4A</color>
+    <color name="success">#34C759</color>
+    <color name="text_hint">#636366</color>
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#AEAEB2</color>
+    <string name="app_name">Partner Doodle</string>
+    <string name="gcm_defaultSenderId" translatable="false">163936779976</string>
+    <string name="google_api_key" translatable="false">AIzaSyApINMWTy3PS4D5eQuuRtRb8MP3mob4a5g</string>
+    <string name="google_app_id" translatable="false">1:163936779976:android:0a26b28e3fc77d0197effd</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyApINMWTy3PS4D5eQuuRtRb8MP3mob4a5g</string>
+    <string name="google_storage_bucket" translatable="false">doodle-app-dbace.firebasestorage.app</string>
+    <string name="project_id" translatable="false">doodle-app-dbace</string>
+    <string name="wallpaper_description">Displays your partner\'s latest doodle on your lock screen.</string>
+    <string name="wallpaper_name">Partner Doodle Live Wallpaper</string>
+    <style name="Theme.PartnerDoodle" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/brand_pink</item>
+        <item name="colorPrimaryVariant">@color/brand_pink_dark</item>
+        <item name="colorOnPrimary">@color/text_primary</item>
+        <item name="colorSecondary">@color/brand_purple</item>
+        <item name="colorSurface">@color/bg_card</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="android:windowBackground">@color/bg_dark</item>
+        <item name="android:statusBarColor">@color/bg_dark</item>
+        <item name="android:navigationBarColor">@color/bg_dark</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+    <style name="Theme.PartnerDoodle.Fullscreen" parent="Theme.PartnerDoodle">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+</resources>
