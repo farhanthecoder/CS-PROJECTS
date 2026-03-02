@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Partner Doodle</string>
+    <string name="wallpaper_name">Partner Doodle Live Wallpaper</string>
+    <string name="wallpaper_description">Displays your partner\'s latest doodle on your lock screen.</string>
+</resources>

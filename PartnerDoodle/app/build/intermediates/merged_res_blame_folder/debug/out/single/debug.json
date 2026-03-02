@@ -1,0 +1,74 @@
+[
+    {
+        "merged": "com.partnerdoodle.app-merged_res-39:/layout_activity_main.xml.flat",
+        "source": "com.partnerdoodle.app-main-41:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.partnerdoodle.app-merged_res-39:/drawable_ic_undo.xml.flat",
+        "source": "com.partnerdoodle.app-main-41:/drawable/ic_undo.xml"
+    },
+    {
+        "merged": "com.partnerdoodle.app-merged_res-39:/xml_wallpaper.xml.flat",
+        "source": "com.partnerdoodle.app-main-41:/xml/wallpaper.xml"
+    },
+    {
+        "merged": "com.partnerdoodle.app-merged_res-39:/drawable_ic_close.xml.flat",
+        "source": "com.partnerdoodle.app-main-41:/drawable/ic_close.xml"
+    },
+    {
+        "merged": "com.partnerdoodle.app-merged_res-39:/layout_item_color_dot.xml.flat",
+        "source": "com.partnerdoodle.app-main-41:/layout/item_color_dot.xml"
+    },
+    {
+        "merged": "com.partnerdoodle.app-merged_res-39:/layout_activity_doodle.xml.flat",
+        "source": "com.partnerdoodle.app-main-41:/layout/activity_doodle.xml"
+    },
+    {
+        "merged": "com.partnerdoodle.app-merged_res-39:/drawable_ic_redo.xml.flat",
+        "source": "com.partnerdoodle.app-main-41:/drawable/ic_redo.xml"
+    },
+    {
+        "merged": "com.partnerdoodle.app-merged_res-39:/layout_activity_pairing.xml.flat",
+        "source": "com.partnerdoodle.app-main-41:/layout/activity_pairing.xml"
+    },
+    {
+        "merged": "com.partnerdoodle.app-merged_res-39:/drawable_ic_heart_filled.xml.flat",
+        "source": "com.partnerdoodle.app-main-41:/drawable/ic_heart_filled.xml"
+    },
+    {
+        "merged": "com.partnerdoodle.app-merged_res-39:/layout_activity_wallpaper_settings.xml.flat",
+        "source": "com.partnerdoodle.app-main-41:/layout/activity_wallpaper_settings.xml"
+    },
+    {
+        "merged": "com.partnerdoodle.app-merged_res-39:/drawable_ic_eraser.xml.flat",
+        "source": "com.partnerdoodle.app-main-41:/drawable/ic_eraser.xml"
+    },
+    {
+        "merged": "com.partnerdoodle.app-merged_res-39:/drawable_ic_heart_outline.xml.flat",
+        "source": "com.partnerdoodle.app-main-41:/drawable/ic_heart_outline.xml"
+    },
+    {
+        "merged": "com.partnerdoodle.app-merged_res-39:/drawable_shape_color_dot.xml.flat",
+        "source": "com.partnerdoodle.app-main-41:/drawable/shape_color_dot.xml"
+    },
+    {
+        "merged": "com.partnerdoodle.app-merged_res-39:/drawable_ic_palette.xml.flat",
+        "source": "com.partnerdoodle.app-main-41:/drawable/ic_palette.xml"
+    },
+    {
+        "merged": "com.partnerdoodle.app-merged_res-39:/drawable_ic_launcher_round.xml.flat",
+        "source": "com.partnerdoodle.app-main-41:/drawable/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.partnerdoodle.app-merged_res-39:/drawable_ic_launcher.xml.flat",
+        "source": "com.partnerdoodle.app-main-41:/drawable/ic_launcher.xml"
+    },
+    {
+        "merged": "com.partnerdoodle.app-merged_res-39:/drawable_shape_color_indicator.xml.flat",
+        "source": "com.partnerdoodle.app-main-41:/drawable/shape_color_indicator.xml"
+    },
+    {
+        "merged": "com.partnerdoodle.app-merged_res-39:/drawable_ic_delete.xml.flat",
+        "source": "com.partnerdoodle.app-main-41:/drawable/ic_delete.xml"
+    }
+]

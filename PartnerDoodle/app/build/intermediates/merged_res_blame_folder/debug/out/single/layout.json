@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "com.partnerdoodle.app-mergeDebugResources-38:/layout/activity_main.xml",
+        "source": "com.partnerdoodle.app-main-41:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.partnerdoodle.app-mergeDebugResources-38:/layout/activity_doodle.xml",
+        "source": "com.partnerdoodle.app-main-41:/layout/activity_doodle.xml"
+    },
+    {
+        "merged": "com.partnerdoodle.app-mergeDebugResources-38:/layout/activity_pairing.xml",
+        "source": "com.partnerdoodle.app-main-41:/layout/activity_pairing.xml"
+    },
+    {
+        "merged": "com.partnerdoodle.app-mergeDebugResources-38:/layout/activity_wallpaper_settings.xml",
+        "source": "com.partnerdoodle.app-main-41:/layout/activity_wallpaper_settings.xml"
+    },
+    {
+        "merged": "com.partnerdoodle.app-mergeDebugResources-38:/layout/item_color_dot.xml",
+        "source": "com.partnerdoodle.app-main-41:/layout/item_color_dot.xml"
+    }
+]

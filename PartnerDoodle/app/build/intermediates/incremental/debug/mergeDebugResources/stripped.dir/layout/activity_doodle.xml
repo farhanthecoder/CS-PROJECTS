@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_dark"
+    tools:context=".DoodleActivity">
+
+    <!-- Top toolbar -->
+    <LinearLayout
+        android:id="@+id/topToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="8dp"
+        android:background="@color/bg_dark"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnClose"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:src="@drawable/ic_close"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="@color/text_primary"
+            android:contentDescription="Close" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/btnUndo"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:src="@drawable/ic_undo"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="@color/text_primary"
+            android:contentDescription="Undo" />
+
+        <ImageButton
+            android:id="@+id/btnRedo"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:src="@drawable/ic_redo"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="@color/text_primary"
+            android:contentDescription="Redo" />
+
+        <ImageButton
+            android:id="@+id/btnClear"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:src="@drawable/ic_delete"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="@color/text_primary"
+            android:contentDescription="Clear canvas" />
+    </LinearLayout>
+
+    <!-- Canvas (takes remaining space between toolbars) -->
+    <com.partnerdoodle.app.DoodleView
+        android:id="@+id/doodleView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/topToolbar"
+        app:layout_constraintBottom_toTopOf="@id/bottomToolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Bottom toolbar -->
+    <LinearLayout
+        android:id="@+id/bottomToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/bg_card"
+        android:paddingVertical="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- Color palette row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="16dp">
+
+            <!-- Selected color indicator -->
+            <View
+                android:id="@+id/selectedColorIndicator"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/shape_color_indicator"
+                android:layout_marginEnd="8dp" />
+
+            <!-- Scrollable color palette -->
+            <HorizontalScrollView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/colorPaletteContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical" />
+
+            </HorizontalScrollView>
+
+            <!-- Eraser -->
+            <ImageButton
+                android:id="@+id/btnEraser"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:src="@drawable/ic_eraser"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:tint="@color/text_primary"
+                android:alpha="0.5"
+                android:layout_marginStart="4dp"
+                android:contentDescription="Eraser" />
+
+            <!-- Background colour -->
+            <ImageButton
+                android:id="@+id/btnBackground"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:src="@drawable/ic_palette"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:tint="@color/text_primary"
+                android:contentDescription="Background colour" />
+
+        </LinearLayout>
+
+        <!-- Brush size row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="16dp"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Brush"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp"
+                android:minWidth="48dp" />
+
+            <SeekBar
+                android:id="@+id/seekBarBrush"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:max="60"
+                android:progress="8"
+                android:layout_marginHorizontal="8dp"
+                android:progressTint="@color/brand_pink"
+                android:thumbTint="@color/brand_pink" />
+
+            <!-- Send button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSend"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Send 💌"
+                android:textSize="14sp"
+                app:backgroundTint="@color/brand_pink"
+                app:cornerRadius="20dp"
+                android:paddingHorizontal="20dp" />
+
+            <ProgressBar
+                android:id="@+id/sendProgressBar"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="8dp"
+                android:visibility="gone"
+                android:indeterminateTint="@color/brand_pink" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

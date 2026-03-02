@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Background -->
+    <path
+        android:fillColor="#FF3B80"
+        android:pathData="M0,0h108v108h-108z" />
+    <!-- Heart -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,78L42.3,67.5C33.6,59.7 27,54.1 27,47.1C27,41.3 31.7,36.6 37.5,36.6C40.7,36.6 43.8,38.1 46,40.5L54,49L62,40.5C64.2,38.1 67.3,36.6 70.5,36.6C76.3,36.6 81,41.3 81,47.1C81,54.1 74.4,59.7 65.7,67.5L54,78Z" />
+    <!-- Pencil tip overlay -->
+    <path
+        android:fillColor="#FFD60A"
+        android:pathData="M66,48L62,44L47,59L47,63L51,63Z"
+        android:strokeColor="#FF9500"
+        android:strokeWidth="1" />
+</vector>
