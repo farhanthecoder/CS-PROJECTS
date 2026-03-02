@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.partnerdoodle.app-mergeDebugResources-38:/values-ky/values-ky.xml",
+            "outputFile": "com.partnerdoodle.app-mergeDebugResources-37:/values-ky/values-ky.xml",
             "map": [
                 {
                     "source": "/home/ubuntu/.gradle/caches/transforms-3/47f83315adcea37a11239e6c21cde2c0/transformed/browser-1.4.0/res/values-ky/values-ky.xml",

@@ -1,22 +1,17 @@
 package com.partnerdoodle.app
 
-import android.content.Context
 import android.graphics.*
 import android.os.Handler
 import android.os.Looper
 import android.service.wallpaper.WallpaperService
 import android.util.Log
 import android.view.SurfaceHolder
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
 import com.google.firebase.database.ValueEventListener
-import kotlinx.coroutines.*
 
 /**
- * Live wallpaper that displays the partner's latest doodle.
- * It listens to Firebase Realtime Database for changes and redraws
- * the surface as soon as a new doodle URL arrives.
+ * Live wallpaper that renders the partner's latest doodle.
+ * The doodle arrives as a Base64 JPEG string from Firebase Realtime Database
+ * (no Firebase Storage required).
  */
 class DoodleWallpaperService : WallpaperService() {
 
@@ -31,18 +26,24 @@ class DoodleWallpaperService : WallpaperService() {
         private var partnerId: String? = null
 
         private val backgroundPaint = Paint().apply {
-            color = Color.parseColor("#1C1C1E")
+            color = Color.parseColor("#1C1C2E")
         }
 
-        private val textPaint = Paint().apply {
+        private val emojiPaint = Paint().apply {
             color = Color.WHITE
-            textSize = 48f
+            textSize = 96f
             textAlign = Paint.Align.CENTER
-            typeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL)
             isAntiAlias = true
         }
 
-        private val subTextPaint = Paint().apply {
+        private val labelPaint = Paint().apply {
+            color = Color.WHITE
+            textSize = 42f
+            textAlign = Paint.Align.CENTER
+            isAntiAlias = true
+        }
+
+        private val subLabelPaint = Paint().apply {
             color = Color.parseColor("#AEAEB2")
             textSize = 32f
             textAlign = Paint.Align.CENTER
@@ -55,17 +56,20 @@ class DoodleWallpaperService : WallpaperService() {
             super.onCreate(surfaceHolder)
             val (_, pId) = FirebaseManager.loadUserFromPrefs(applicationContext)
             partnerId = pId
-            if (pId != null) attachFirebaseListener(pId)
 
-            // Load cached doodle immediately
-            val cachedUrl = FirebaseManager.loadPartnerDoodleUrl(applicationContext)
-            if (cachedUrl != null) loadBitmapFromUrl(cachedUrl)
+            // Load cached doodle immediately so the wallpaper isn't blank on restart
+            FirebaseManager.loadPartnerDoodleData(applicationContext)?.let { base64 ->
+                doodleBitmap = FirebaseManager.base64ToBitmap(base64)
+            }
+
+            if (pId != null) attachFirebaseListener(pId)
         }
 
         override fun onDestroy() {
             super.onDestroy()
-            val pId = partnerId ?: return
-            firebaseListener?.let { FirebaseManager.removeListener(pId, it) }
+            partnerId?.let { pId ->
+                firebaseListener?.let { FirebaseManager.removeListener(pId, it) }
+            }
         }
 
         override fun onVisibilityChanged(visible: Boolean) {
@@ -73,7 +77,9 @@ class DoodleWallpaperService : WallpaperService() {
             if (visible) drawFrame()
         }
 
-        override fun onSurfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
+        override fun onSurfaceChanged(
+            holder: SurfaceHolder, format: Int, width: Int, height: Int
+        ) {
             super.onSurfaceChanged(holder, format, width, height)
             drawFrame()
         }
@@ -81,28 +87,10 @@ class DoodleWallpaperService : WallpaperService() {
         // ── Firebase listener ────────────────────────────────────────────────
 
         private fun attachFirebaseListener(pId: String) {
-            firebaseListener = FirebaseManager.listenForPartnerDoodle(pId) { url, _ ->
-                FirebaseManager.savePartnerDoodleUrl(applicationContext, url)
-                loadBitmapFromUrl(url)
+            firebaseListener = FirebaseManager.listenForPartnerDoodle(pId) { bmp, _ ->
+                doodleBitmap = bmp
+                drawFrame()
             }
-        }
-
-        // ── Bitmap loading ───────────────────────────────────────────────────
-
-        private fun loadBitmapFromUrl(url: String) {
-            Glide.with(applicationContext)
-                .asBitmap()
-                .load(url)
-                .into(object : CustomTarget<Bitmap>() {
-                    override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                        doodleBitmap = resource
-                        drawFrame()
-                    }
-
-                    override fun onLoadCleared(placeholder: android.graphics.drawable.Drawable?) {
-                        doodleBitmap = null
-                    }
-                })
         }
 
         // ── Drawing ──────────────────────────────────────────────────────────
@@ -112,15 +100,15 @@ class DoodleWallpaperService : WallpaperService() {
             var canvas: Canvas? = null
             try {
                 canvas = holder.lockCanvas()
-                if (canvas != null) draw(canvas)
+                if (canvas != null) render(canvas)
             } finally {
-                if (canvas != null) {
-                    try { holder.unlockCanvasAndPost(canvas) } catch (_: Exception) {}
+                canvas?.let {
+                    try { holder.unlockCanvasAndPost(it) } catch (_: Exception) {}
                 }
             }
         }
 
-        private fun draw(canvas: Canvas) {
+        private fun render(canvas: Canvas) {
             val w = canvas.width.toFloat()
             val h = canvas.height.toFloat()
 
@@ -128,23 +116,18 @@ class DoodleWallpaperService : WallpaperService() {
 
             val bmp = doodleBitmap
             if (bmp != null && !bmp.isRecycled) {
-                // Scale to fit while keeping aspect ratio
                 val scale = minOf(w / bmp.width, h / bmp.height)
                 val scaledW = bmp.width * scale
                 val scaledH = bmp.height * scale
-                val left = (w - scaledW) / 2f
-                val top = (h - scaledH) / 2f
-
-                val matrix = Matrix()
-                matrix.postScale(scale, scale)
-                matrix.postTranslate(left, top)
-
+                val matrix = Matrix().apply {
+                    postScale(scale, scale)
+                    postTranslate((w - scaledW) / 2f, (h - scaledH) / 2f)
+                }
                 canvas.drawBitmap(bmp, matrix, null)
             } else {
-                // Placeholder when no doodle yet
-                canvas.drawText("💌", w / 2f, h / 2f - 60f, textPaint.apply { textSize = 96f })
-                canvas.drawText("Waiting for your", w / 2f, h / 2f + 30f, textPaint.apply { textSize = 42f })
-                canvas.drawText("partner's doodle…", w / 2f, h / 2f + 85f, subTextPaint)
+                canvas.drawText("💌", w / 2f, h / 2f - 60f, emojiPaint)
+                canvas.drawText("Waiting for your", w / 2f, h / 2f + 30f, labelPaint)
+                canvas.drawText("partner's doodle…", w / 2f, h / 2f + 82f, subLabelPaint)
             }
         }
     }

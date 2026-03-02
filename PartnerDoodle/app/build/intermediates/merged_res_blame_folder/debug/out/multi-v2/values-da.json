@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.partnerdoodle.app-mergeDebugResources-38:/values-da/values-da.xml",
+            "outputFile": "com.partnerdoodle.app-mergeDebugResources-37:/values-da/values-da.xml",
             "map": [
                 {
                     "source": "/home/ubuntu/.gradle/caches/transforms-3/88835fb08d3d1941d1a9ccf28115066c/transformed/play-services-base-18.1.0/res/values-da/values.xml",

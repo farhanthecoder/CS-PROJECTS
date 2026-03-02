@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.partnerdoodle.app-mergeDebugResources-38:/values-gl/values-gl.xml",
+            "outputFile": "com.partnerdoodle.app-mergeDebugResources-37:/values-gl/values-gl.xml",
             "map": [
                 {
                     "source": "/home/ubuntu/.gradle/caches/transforms-3/98c9057881eff89cd37ae9aacc468169/transformed/core-1.12.0/res/values-gl/values-gl.xml",
