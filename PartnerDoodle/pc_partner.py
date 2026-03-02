@@ -12,6 +12,8 @@ import io
 import sys
 import math
 import base64
+import json
+import os
 
 try:
     from PIL import Image, ImageDraw
@@ -28,14 +30,48 @@ DB_URL     = f"https://{PROJECT_ID}-default-rtdb.firebaseio.com"
 
 # ── Firebase Auth ─────────────────────────────────────────────────────────────
 
+IDENTITY_FILE = os.path.expanduser("~/.partnerdoodle_identity.json")
+
 def sign_in_anonymously():
+    """
+    Sign in anonymously, reusing a saved refresh token so the UID stays
+    the same across runs. This means the phone only needs to pair once.
+    """
+    # Try to restore an existing session first
+    if os.path.exists(IDENTITY_FILE):
+        try:
+            saved = json.load(open(IDENTITY_FILE))
+            refresh_token = saved.get("refreshToken")
+            if refresh_token:
+                url = f"https://securetoken.googleapis.com/v1/token?key={API_KEY}"
+                resp = requests.post(url, json={
+                    "grant_type": "refresh_token",
+                    "refresh_token": refresh_token
+                }, timeout=10)
+                data = resp.json()
+                if "id_token" in data:
+                    uid = data["user_id"]
+                    id_token = data["id_token"]
+                    new_refresh = data["refresh_token"]
+                    json.dump({"uid": uid, "refreshToken": new_refresh},
+                              open(IDENTITY_FILE, "w"))
+                    print(f"  (Reusing existing identity: {uid[-6:].upper()})")
+                    return uid, id_token
+        except Exception:
+            pass  # Fall through to create a new identity
+
+    # Create a new anonymous identity
     url = f"https://identitytoolkit.googleapis.com/v1/accounts:signUp?key={API_KEY}"
     resp = requests.post(url, json={"returnSecureToken": True}, timeout=10)
     data = resp.json()
     if "localId" not in data:
         print(f"Auth failed: {data}")
         sys.exit(1)
-    return data["localId"], data["idToken"]
+    uid = data["localId"]
+    id_token = data["idToken"]
+    json.dump({"uid": uid, "refreshToken": data["refreshToken"]},
+              open(IDENTITY_FILE, "w"))
+    return uid, id_token
 
 # ── Pairing ───────────────────────────────────────────────────────────────────
 
